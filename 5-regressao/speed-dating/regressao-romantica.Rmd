@@ -37,6 +37,7 @@ library(broom)
 library(modelr)
 library(dplyr)
 library(GGally)
+library(pscl)
 theme_set(theme_bw())
 
 knitr::opts_chunk$set(tidy = FALSE,
