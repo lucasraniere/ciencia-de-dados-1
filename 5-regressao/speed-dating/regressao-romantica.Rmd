@@ -1,0 +1,71 @@
+---
+title: "Regressão Romântica <3"
+author: "Lucas Raniére J. Santos"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+  html_notebook:
+    fig_width: 7
+    theme: readable
+    toc: yes
+    toc_float: yes
+---
+
+## Links úteis
+
+https://github.com/lucasraniere/ciencia-de-dados-1/tree/master/5-regressao/speed-dating
+
+https://github.com/nazareno/ciencia-de-dados-1/blob/master/5-regressao/4-regressao-logistica.Rmd
+
+https://rpubs.com/dvorakt/151334
+
+http://rpubs.com/ryankelly/21379
+
+## Dados
+
+
+Os dados apresentados abaixo descrevem 5.000 encontros relâmpagos e 4 minutos cada, envolvendo 310 jovens americanos. Os dados originais foram coletados por professores da <i>Columbia Businesse School</i>.
+
+Os participantes tinham vários encontros por noite, e após cada encontro, avaliavam o par.
+
+Cada linha nos dados representa um econtro:
+
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(broom)
+library(modelr)
+theme_set(theme_bw())
+
+knitr::opts_chunk$set(tidy = FALSE,
+                      fig.width = 6,
+                      fig.height = 5)
+
+paleta = c("#404E4D",
+           "#92DCE5",
+           "#938BA1",
+           "#2D3142",
+           "#F4743B")
+```
+
+```{r warning=FALSE, message=FALSE}
+dating <- read_csv("speed-dating2.csv")
+
+dating %>%
+  glimpse()
+```
+
+## Objetivo da atividade
+
+O objetivo é utilizar regressão logística em um conjunto de váriavies (mínimo quatro variáveis), de livre escolha, e reponder os seguintes questionamentos:
+
+> Que fatores nos dados têm efeito relevante na chance do casal ter um <i>match</i>?
+
+> Descreva se os efeitos são positivos ou negativos, e a sua magnitude.
+
+## EDA
+
+```{r}
+
+```
+
