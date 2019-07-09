@@ -35,6 +35,8 @@ Cada linha nos dados representa um econtro:
 library(tidyverse)
 library(broom)
 library(modelr)
+library(dplyr)
+library(GGally)
 theme_set(theme_bw())
 
 knitr::opts_chunk$set(tidy = FALSE,
@@ -55,6 +57,24 @@ dating %>%
   glimpse()
 ```
 
+Criando a variável "age_d" para representar a diferença de idade entre os participantes:
+
+```{r}
+dating <- dating %>%
+  mutate(age_d = (age - age_o)) %>%
+  ungroup()
+```
+
+
+Dummificando "dec":
+```{r}
+dating <- dating %>%
+  mutate(mat = ifelse(dec == "yes", 1,0))
+
+dating <- select(dating, -dec)
+```
+
+
 ## Objetivo da atividade
 
 O objetivo é utilizar regressão logística em um conjunto de váriavies (mínimo quatro variáveis), de livre escolha, e reponder os seguintes questionamentos:
@@ -63,9 +83,36 @@ O objetivo é utilizar regressão logística em um conjunto de váriavies (míni
 
 > Descreva se os efeitos são positivos ou negativos, e a sua magnitude.
 
+Das variáveis disponíveis, escolhi as seguintes:
+
+    int_corr: correlação entre os interesses de p1 e p2;
+  
+    age_d: diferença entre a idade de p1 e p2;
+  
+    attr: o quão p1 achou p2 atraente;
+
+    like: no geral, quanto p1 gostou de p2?
+
 ## EDA
 
-```{r}
+A variável dependente que será estudada é a variável "mat" (de matching), que nada mais é uma versão dummy de "dec". Onde 0 significa match positivo.
 
+
+
+## Regressão Logística
+
+```{r}
+logit_model <- glm(mat ~ int_corr + age_d + attr + like, data = dating, family = "binomial")
+
+tidy(logit_model, conf.int = TRUE, exponentiate = TRUE)
+
+glance(logit_model)
+pR2(logit_model)
 ```
+
+
+
+
+
+
 
